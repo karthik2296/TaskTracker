@@ -21,12 +21,15 @@ func main() {
 	})
 
 	// Database connection parameters
+	//
+	//
+	//
 	const (
 		host     = "localhost"
 		port     = 5432
 		user     = "postgres"
-		password = "test123" // Replace with your actual password
-		dbname   = "mydatabase"    // Replace with your actual database name
+		password = "test123"    // Replace with your actual password
+		dbname   = "mydatabase" // Replace with your actual database name
 	)
 
 	// Create a connection string
