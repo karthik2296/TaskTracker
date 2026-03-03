@@ -11,7 +11,7 @@ func GetAll() []models.Task {
 	return tasks
 }
 
-func Add(title string) models.Task {
+func NewAdd(title string) models.Task {
 	task := models.Task{
 		Id:        nextId,
 		Title:     title,
@@ -21,4 +21,15 @@ func Add(title string) models.Task {
 	nextId++
 	tasks = append(tasks, task)
 	return task
+}
+
+func TaskCompleted(title string) models.Task {
+	for i, task := range tasks {
+		if task.Title == title {
+			tasks[i].Completed = true
+			return tasks[i]
+		}
+
+	}
+	return models.Task{}
 }

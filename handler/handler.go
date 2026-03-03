@@ -7,7 +7,9 @@ import (
 )
 
 type CreateTaskRequest struct {
-	Title string `json:"title"`
+	Title     string `json:"title"`
+	New       bool   `json:"new"`
+	Completed bool   `json:"completed"`
 }
 
 func GetTasks(w http.ResponseWriter, r *http.Request) {
@@ -22,13 +24,12 @@ func CreateTask(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	task := storage.Add(req.Title)
-
+	task := storage.NewAdd(req.Title)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(task)
-}
 
+}
 
 func UpdateTask(w http.ResponseWriter, r *http.Request) {
 	var req CreateTaskRequest
@@ -37,7 +38,7 @@ func UpdateTask(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	task := storage.Add(req.Title)
+	task := storage.TaskCompleted(req.Title)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
